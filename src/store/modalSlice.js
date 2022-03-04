@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 // false == light and true == dark
-const initialThemeState = { displayModal: false, modalType: "" }
+const initialModalState = { displayModal: false, modalType: "" }
 
 const modalSlice = createSlice({
   name: "modal",
-  initialState: initialThemeState,
+  initialState: initialModalState,
   reducers: {
     toggleModal(state) {
       state.displayModal = !state.displayModal

@@ -1,7 +1,7 @@
 import React from "react"
 import * as S from "./HomeStyles"
 import Modal from "../Modal/Modal"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { modalActions } from "../../store/modalSlice"
 
 // login // axios -> post -> localhost:3500/auth
@@ -13,6 +13,9 @@ import { modalActions } from "../../store/modalSlice"
 
 const Home = () => {
   const dispatch = useDispatch()
+  const accessToken = useSelector((state) => state.auth.accessToken)
+  const user = useSelector((state) => state.auth.user)
+
   const handleModal = (type) => {
     dispatch(modalActions.toggleModal())
     dispatch(modalActions.changeModalType(type))
@@ -29,7 +32,10 @@ const Home = () => {
             <S.Button onClick={() => handleModal("login")}>Login</S.Button>
           </S.OptionsWrap>
           <S.OptionsWrap>
-            {true && "hello USERNAME"}
+            {user && `hello ${user}`}
+            {accessToken && (
+              <p style={{ wordBreak: "break-all" }}>access: {accessToken}</p>
+            )}
             <S.Button>Logout</S.Button>
           </S.OptionsWrap>
         </S.Wrapper>

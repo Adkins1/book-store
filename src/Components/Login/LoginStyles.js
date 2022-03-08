@@ -14,14 +14,20 @@ export const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
 `
-export const OptionsWrap = styled.div`
-  width: 50%;
-  height: 60vh;
-  border: 1px solid black;
+export const Form = styled.form`
+  background: #3d5af1;
+  height: 50%;
+  width: 60%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
+  border: 1px solid black;
+  gap: 10px;
+`
+export const Input = styled.input`
+  height: 4rem;
+  width: 80%;
   font-size: 1.5rem;
 `
 export const Button = styled.button`
@@ -32,11 +38,6 @@ export const Button = styled.button`
   background: #22d1ee;
   cursor: pointer;
   transition: 0.2s;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
   :hover {
     background: #41d6f1;
     transition: 0.2s;

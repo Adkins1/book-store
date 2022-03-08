@@ -2,7 +2,8 @@ import React from "react"
 import * as S from "./HomeStyles"
 import Modal from "../Modal/Modal"
 import { useDispatch, useSelector } from "react-redux"
-import { modalActions } from "../../store/modalSlice"
+import { authActions } from "../../store/authSlice"
+import { useNavigate, Link } from "react-router-dom"
 
 // login // axios -> post -> localhost:3500/auth
 // register // axios -> post -> localhost:3500/register
@@ -13,30 +14,27 @@ import { modalActions } from "../../store/modalSlice"
 
 const Home = () => {
   const dispatch = useDispatch()
-  const accessToken = useSelector((state) => state.auth.accessToken)
+  const navigate = useNavigate()
   const user = useSelector((state) => state.auth.user)
-
-  const handleModal = (type) => {
-    dispatch(modalActions.toggleModal())
-    dispatch(modalActions.changeModalType(type))
+  const logout = async () => {
+    // if used in more components, this should be in context
+    // axios to /logout endpoint
+    dispatch(authActions.setAuth({}))
+    navigate("/linkpage")
   }
-
   return (
     <>
       <S.Container>
         <S.Wrapper>
           <S.OptionsWrap>
-            <S.Button onClick={() => handleModal("register")}>
-              Register
-            </S.Button>
-            <S.Button onClick={() => handleModal("login")}>Login</S.Button>
-          </S.OptionsWrap>
-          <S.OptionsWrap>
-            {user && `hello ${user}`}
-            {accessToken && (
-              <p style={{ wordBreak: "break-all" }}>access: {accessToken}</p>
-            )}
-            <S.Button>Logout</S.Button>
+            <h1>Home</h1>
+            <p>You are logged in as {user && `${user}`}</p>
+            <Link to="/editor">Go to the Editor page</Link>
+            <br />
+            <Link to="/admin">Go to the Admin page</Link>
+            <br />
+            <Link to="/linkpage">Go to the link page</Link>
+            <S.Button onClick={logout}>Logout</S.Button>
           </S.OptionsWrap>
         </S.Wrapper>
       </S.Container>
